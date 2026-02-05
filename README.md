@@ -1,68 +1,62 @@
 # Credit-Card-Fraud-Detection
 Credit card fraud detection using machine learning on highly imbalanced data
 
-This project focuses on detecting fraudulent credit card transactions using machine learning techniques on a highly imbalanced dataset.
+This project implements a credit card fraud detection system using **Logistic Regression** on a highly imbalanced dataset. The focus is on selecting appropriate evaluation metrics and handling class imbalance effectively.
 
 ---
 
-## 📌 Dataset Description
+## 📌 Dataset Overview
 - Transactions made by European cardholders in September 2013
 - Total transactions: 284,807
 - Fraud cases: 492 (0.172%)
 - Features:
   - `V1`–`V28`: PCA-transformed features (confidential)
-  - `Time`: Seconds elapsed between transactions
+  - `Time`: Time elapsed since first transaction (seconds)
   - `Amount`: Transaction amount
-  - `Class`: Target variable (1 = Fraud, 0 = Legit)
+  - `Class`: Target variable (1 = Fraud, 0 = Legitimate)
 
 ---
 
-## ⚠️ Challenge
-The dataset is **extremely imbalanced**, making accuracy and confusion matrix misleading. Therefore, evaluation focuses on:
-- **Area Under Precision–Recall Curve (AUPRC)**
-- **ROC-AUC**
+## ⚠️ Problem Statement
+The dataset is **extremely imbalanced**, making accuracy and confusion matrix metrics misleading. The project therefore focuses on metrics suitable for imbalanced classification.
 
 ---
 
-## 🧠 Models Used
-- Logistic Regression (with class balancing)
-- Random Forest Classifier
-
-Hyperparameter tuning was performed using **GridSearchCV**, optimized for **AUPRC**.
+## 🧠 Model Used
+### Logistic Regression
+- Binary probabilistic classifier
+- Uses sigmoid function to estimate fraud probability
+- Handles imbalance using `class_weight='balanced'`
+- Hyperparameters tuned using **GridSearchCV**
 
 ---
 
 ## ⚙️ Preprocessing
-- PCA features were already scaled
-- `Time` and `Amount` were standardized
-- Class imbalance handled using `class_weight='balanced'`
+- PCA features (`V1–V28`) already standardized
+- `Time` and `Amount` features scaled using `StandardScaler`
+- Data split into training and test sets
 
 ---
 
 ## 📊 Evaluation Metrics
-- **AUPRC** (primary metric)
+- **Area Under Precision–Recall Curve (AUPRC)** *(primary metric)*
 - ROC-AUC
 - Precision–Recall Curve visualization
 
 ---
 
 ## 🚀 Results
-| Model | AUPRC | ROC-AUC |
-|------|------|--------|
-| Logistic Regression | 0.73 | 0.98 |
-| Random Forest | ~0.80 | ~0.94 |
+| Metric | Score |
+|------|------|
+| AUPRC | 0.73 |
+| ROC-AUC | 0.98 |
+
+> The AUPRC score is significantly higher than the random baseline (~0.0017), demonstrating strong fraud detection capability.
 
 ---
 
-## 🛠️ Tech Stack
-- Python
-- scikit-learn
-- pandas
-- numpy
-- matplotlib
-
----
-
-## 📁 How to Run
-```bash
-pip install -r requirements.txt
+## 🔍 Best Hyperparameters
+```text
+C = 0.1
+penalty = l2
+solver = lbfgs
