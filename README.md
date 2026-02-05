@@ -60,3 +60,13 @@ The dataset is **extremely imbalanced**, making accuracy and confusion matrix me
 C = 0.1
 penalty = l2
 solver = lbfgs
+
+## 📌 Key Takeaways
+- AUPRC is more meaningful than accuracy for fraud detection
+- Logistic Regression provides a strong and interpretable baseline
+- Proper metric selection is critical for imbalanced data
+
+---
+
+## 📚 Dataset Source
+UCI / Kaggle Credit Card Fraud Dataset
